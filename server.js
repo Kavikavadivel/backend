@@ -11,6 +11,10 @@ const app = express();
 app.use(cors());  // Allows frontend to connect
 app.use(bodyParser.json());  // Parses JSON requests
 
+const corsOption = {
+  orgin:`https://frontend-tkem.onrender.com`,
+  optionSuccessStatus:200
+};
 // Connect to MySQL database
 const db = mysql.createConnection({
   host: 'sql12.freesqldatabase.com',
@@ -38,7 +42,7 @@ app.get('/recipes', (req, res) => {
 // // API: Search recipes by title
 app.get('/recipes/search', (req, res) => {
   const searchTerm = req.query.term;
-  db.query('SELECT * FROM recipe WHERE title LIKE ?', [`%${searchTerm}%`], (err, results) => {
+  db.query('SELECT * FROM recipe WHERE title LIKE ?', [%${searchTerm}%], (err, results) => {
     if (err) throw err;
     res.json(results);
   });
